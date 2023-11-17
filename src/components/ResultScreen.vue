@@ -2,25 +2,24 @@
   <div class="screen">
     <h3>✨ Congratulations ✨</h3>
     <p>{{ Math.round(timer / 1000) }} seconds</p>
-    <button
-    @click="onStart">Start Again</button>
+    <button @click="onStart">Start Again</button>
   </div>
 </template>
 
 <script>
 export default {
-  props:{
-    timer:{
+  props: {
+    timer: {
       type: Number,
       require: true,
-    }
+    },
   },
-  methods:{
-    onStart(){
-      this.$emit("onStartAgain")
-    }
-  }
-}
+  methods: {
+    onStart() {
+      this.$emit("onStartAgain");
+    },
+  },
+};
 </script>
 
 <style lang="css" scoped>

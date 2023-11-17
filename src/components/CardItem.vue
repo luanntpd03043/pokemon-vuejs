@@ -9,7 +9,7 @@
       }px`,
       perspective: `${
         ((((920 - 16 * 4) / Math.sqrt(cardsContext.length) - 16) * 3) / 4) * 2
-      }`
+      }`,
     }"
   >
     <div
@@ -60,7 +60,7 @@ export default {
         return [];
       },
     },
-    rules:{
+    rules: {
       type: Array,
       default: function () {
         return [];
@@ -76,10 +76,10 @@ export default {
   methods: {
     onToggleFlipCard() {
       if (this.isDisable) return false;
-      
-      if(this.rules.length === 2 || this.rules.length > 2) {
+
+      if (this.rules.length === 2 || this.rules.length > 2) {
         return false;
-      }else{
+      } else {
         this.isFlipped = !this.isFlipped;
       }
       this.$emit("onFlip", this.card);

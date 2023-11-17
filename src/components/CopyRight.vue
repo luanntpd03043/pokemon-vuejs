@@ -1,6 +1,9 @@
 <template>
   <div class="copyright">
-    <p>This game owned by Mrluan in Vue 3 course for beginers - <a href="#">View here</a></p>
+    <p>
+      This game owned by Mrluan in Vue 3 course for beginers -
+      <a href="#">View here</a>
+    </p>
   </div>
 </template>
 
@@ -9,12 +12,12 @@
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
-  bottom: .5rem;
+  bottom: 0.5rem;
   color: var(--light);
   z-index: 30;
   font-size: 1.5rem;
   width: 100%;
-    text-align: center;
+  text-align: center;
 }
 
 .copyright a {

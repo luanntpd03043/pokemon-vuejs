@@ -4,17 +4,18 @@
       v-if="statusMatch === 'default'"
       @onStart="onHandleBeforeStart($event)"
     />
-    <interact-screen 
-    v-if="statusMatch === 'match'" 
-    :cardsContext="setting.cardsContext"
-    @onFinish="onGetResult"
+    <interact-screen
+      v-if="statusMatch === 'match'"
+      :cardsContext="setting.cardsContext"
+      @onFinish="onGetResult"
+      @onReStart="onStart"
     />
-    <result-screen 
-    v-if="statusMatch === 'result'" 
-    :timer="timer"
-    @onStartAgain="onStart"
+    <result-screen
+      v-if="statusMatch === 'result'"
+      :timer="timer"
+      @onStartAgain="onStart"
     />
-    <copy-right/>
+    <copy-right />
   </div>
 </template>
 <script>
@@ -33,7 +34,7 @@ export default {
         startedAt: null,
       },
       statusMatch: "default",
-      timer: 0
+      timer: 0,
     };
   },
   components: {
@@ -54,22 +55,21 @@ export default {
 
       const cards = [...firstCards, ...secondCards]; //Gộp 2 mảng
 
-      this.setting.cardsContext = shuffled(shuffled(shuffled(shuffled(cards))));  //Trộn mảng
+      this.setting.cardsContext = shuffled(shuffled(shuffled(shuffled(cards)))); //Trộn mảng
 
       this.setting.startedAt = new Date().getTime();
 
-      
       this.statusMatch = "match";
     },
-    onGetResult(){
+    onGetResult() {
       // get Timer
       this.timer = new Date().getTime() - this.setting.startedAt;
       // switch to result component
       this.statusMatch = "result";
     },
-    onStart(){
-      this.statusMatch = 'default';
-    }
+    onStart() {
+      this.statusMatch = "default";
+    },
   },
 };
 </script>

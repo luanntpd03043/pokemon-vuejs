@@ -33,7 +33,6 @@ export default {
 };
 </script>
 
-
 <style lang="css" scoped>
 .screen {
   width: 100%;

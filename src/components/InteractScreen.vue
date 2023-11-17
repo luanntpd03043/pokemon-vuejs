@@ -5,8 +5,9 @@
       :style="{
         width: `${
           ((((920 - 16 * 4) / Math.sqrt(cardsContext.length) - 16) * 3) / 4 +
-            16) * Math.sqrt(cardsContext.length)
-        }px`
+            16) *
+          Math.sqrt(cardsContext.length)
+        }px`,
       }"
     >
       <card-flip
@@ -20,6 +21,7 @@
         @onFlip="checkRule($event)"
       />
     </div>
+    <button class="reStart" @click="onReStart">Start</button>
   </div>
 </template>
 <script>
@@ -44,12 +46,18 @@ export default {
   methods: {
     checkRule(card) {
       if (this.rules.length === 2) return false;
-    
+
       this.rules.push(card);
 
-      if(this.rules.length === 2 && this.rules[0].index === this.rules[1].index){
+      if (
+        this.rules.length === 2 &&
+        this.rules[0].index === this.rules[1].index
+      ) {
         this.rules = [];
-      }else if (this.rules.length === 2 && this.rules[0].value === this.rules[1].value) {
+      } else if (
+        this.rules.length === 2 &&
+        this.rules[0].value === this.rules[1].value
+      ) {
         this.$refs[`card-${this.rules[0].index}`][0].onEnableDisableMode();
         this.$refs[`card-${this.rules[1].index}`][0].onEnableDisableMode();
         this.rules = [];
@@ -65,7 +73,10 @@ export default {
             this.$emit("onFinish");
           }, 950);
         }
-      } else if (this.rules.length === 2 && this.rules[0].value !== this.rules[1].value) {
+      } else if (
+        this.rules.length === 2 &&
+        this.rules[0].value !== this.rules[1].value
+      ) {
         console.log(this.rules);
         setTimeout(() => {
           this.$refs[`card-${this.rules[0].index}`][0].onFlipBackCard();
@@ -73,13 +84,35 @@ export default {
           this.rules = [];
         }, 800);
       } else return false;
-
+    },
+    onReStart() {
+      this.$emit("onReStart");
     },
   },
 };
 </script>
 
 <style lang="css" scoped>
+.reStart {
+  position: absolute;
+  top: 50px;
+  z-index: 888;
+  left: 20px;
+  width: 80px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.reStart:hover {
+  background-color: bisque;
+}
 .screen {
   width: 100%;
   height: 100vh;
@@ -90,7 +123,6 @@ export default {
   background-color: var(--dark);
   color: var(--light);
 }
-
 .screen_inner {
   display: flex;
   flex-wrap: wrap;
