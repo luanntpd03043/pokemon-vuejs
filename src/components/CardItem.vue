@@ -60,6 +60,12 @@ export default {
         return [];
       },
     },
+    rules:{
+      type: Array,
+      default: function () {
+        return [];
+      },
+    },
   },
   data() {
     return {
@@ -70,10 +76,13 @@ export default {
   methods: {
     onToggleFlipCard() {
       if (this.isDisable) return false;
-      this.isFlipped = !this.isFlipped;
-      if (this.isFlipped) {
-        this.$emit("onFlip", this.card);
+      
+      if(this.rules.length === 2 || this.rules.length > 2) {
+        return false;
+      }else{
+        this.isFlipped = !this.isFlipped;
       }
+      this.$emit("onFlip", this.card);
     },
     onFlipBackCard() {
       this.isFlipped = false;

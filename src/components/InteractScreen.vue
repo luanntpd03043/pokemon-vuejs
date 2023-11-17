@@ -16,6 +16,7 @@
         :imgBackFaceUrl="`images/${card}.png`"
         :card="{ index, value: card }"
         :cardsContext="cardsContext"
+        :rules="rules"
         @onFlip="checkRule($event)"
       />
     </div>
@@ -43,13 +44,12 @@ export default {
   methods: {
     checkRule(card) {
       if (this.rules.length === 2) return false;
-
+    
       this.rules.push(card);
 
-      if (
-        this.rules.length === 2 &&
-        this.rules[0].value === this.rules[1].value
-      ) {
+      if(this.rules.length === 2 && this.rules[0].index === this.rules[1].index){
+        this.rules = [];
+      }else if (this.rules.length === 2 && this.rules[0].value === this.rules[1].value) {
         this.$refs[`card-${this.rules[0].index}`][0].onEnableDisableMode();
         this.$refs[`card-${this.rules[1].index}`][0].onEnableDisableMode();
         this.rules = [];
@@ -65,16 +65,15 @@ export default {
             this.$emit("onFinish");
           }, 950);
         }
-      } else if (
-        this.rules.length === 2 &&
-        this.rules[0].value !== this.rules[1].value
-      ) {
+      } else if (this.rules.length === 2 && this.rules[0].value !== this.rules[1].value) {
+        console.log(this.rules);
         setTimeout(() => {
           this.$refs[`card-${this.rules[0].index}`][0].onFlipBackCard();
           this.$refs[`card-${this.rules[1].index}`][0].onFlipBackCard();
           this.rules = [];
         }, 800);
       } else return false;
+
     },
   },
 };
