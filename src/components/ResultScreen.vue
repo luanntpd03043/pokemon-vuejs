@@ -1,7 +1,14 @@
 <template>
   <div class="screen">
     <h3>✨ Congratulations ✨</h3>
-    <p>{{ Math.round(timer / 1000) }} seconds</p>
+    <p>
+      {{
+        Math.floor(this.timer / 1000 / 60) +
+        " minute " +
+        (Math.floor(this.timer / 1000) % 60) +
+        " seconds"
+      }}
+    </p>
     <button @click="onStart">Start Again</button>
   </div>
 </template>
@@ -47,6 +54,10 @@ export default {
   font-size: 3rem;
 }
 
+.screen h3 + p {
+  margin-top: 15px;
+  font-size: 18px;
+}
 .screen button {
   font: var(--font);
   background: transparent;
